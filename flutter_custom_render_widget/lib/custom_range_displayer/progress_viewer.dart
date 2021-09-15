@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+
 class CustomProgressRangeViewer extends LeafRenderObjectWidget {
   const CustomProgressRangeViewer({
     Key? key,
@@ -11,7 +12,7 @@ class CustomProgressRangeViewer extends LeafRenderObjectWidget {
     this.thumbSize = 20.0,
     required this.breakPoints,
     required this.activeThumbColor,
-    required this.activeIndex
+    required this.activeIndex,
   }) : super(key: key);
 
   final Color barColor;
@@ -57,8 +58,6 @@ class CustomProgressRangeViewer extends LeafRenderObjectWidget {
 
 class RenderRangeSlider extends RenderBox {
   static const _minDesiredWidth = 100.0;
-  double _currentThumbValue = 0.5;
-  late HorizontalDragGestureRecognizer _drag;
 
   Color get barColor => _barColor;
   Color _barColor;
@@ -124,17 +123,7 @@ class RenderRangeSlider extends RenderBox {
         _thumbSize = thumbSize,
         _activeThumbColor = activeThumbColor,
         _breaks = breakPoints,
-        _activeIndex = activeIndex
-  {
-    // initialize the gesture recognizer
-    _drag = HorizontalDragGestureRecognizer()
-      ..onStart = (DragStartDetails details) {
-        _updateThumbPosition(details.localPosition);
-      }
-      ..onUpdate = (DragUpdateDetails details) {
-        _updateThumbPosition(details.localPosition);
-      };
-  }
+        _activeIndex = activeIndex;
 
   @override
   double computeMaxIntrinsicHeight(double width) {
@@ -245,22 +234,8 @@ class RenderRangeSlider extends RenderBox {
   @override
   bool hitTestSelf(Offset position) => true;
 
-  @override
-  void handleEvent(PointerEvent event, BoxHitTestEntry entry) {
-    assert(debugHandleEvent(event, entry));
-    if (event is PointerDownEvent) {
-      _drag.addPointer(event);
-    }
-  }
 
   @override
   bool get isRepaintBoundary => true;
 
-  void _updateThumbPosition(Offset localPosition) {
-
-    // var dx = localPosition.dx.clamp(0, size.width);
-    // _currentThumbValue = dx / size.width;
-    // markNeedsPaint();
-    // markNeedsSemanticsUpdate();
-  }
 }

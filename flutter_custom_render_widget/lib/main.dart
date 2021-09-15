@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_custom_render_widget/custom_rectangle_slider/rectangular_slider.dart';
 import 'custom_range_displayer/progress_viewer.dart';
 
 void main() {
@@ -37,6 +38,19 @@ class Home extends StatelessWidget {
                 breakPoints: [0, 15, 54, 75, 100],
                 activeThumbColor: Colors.red,
                 activeIndex: 1),
+          ),
+          RectangularSlider(
+              borderColor: Colors.grey,
+              selectionColor: Colors.red,
+              selectionWidth: 150,
+              height: MediaQuery.of(context).size.height * 0.4,
+              width: MediaQuery.of(context).size.width - 20,
+              strokeWidth: 8,
+              sliderStartPoint: 0,
+            onSliderValueChange: (points) {
+                print(points.start);
+                print(points.end);
+            },
           )
         ],
       ),
